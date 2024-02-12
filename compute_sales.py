@@ -1,5 +1,5 @@
 """
-Módulo para calcular el costo total de las ventas
+Módulo para calcular el costo total de las ventas.
 """
 import json
 import time
@@ -7,9 +7,8 @@ import time
 
 def compute_sales(price_catalogue_file: str, sales_record_file: str) -> float:
     """
-    Calcula el costo total de las ventas
+    Calcula el costo total de las ventas.
     """
-
     with open(price_catalogue_file, 'r', encoding='utf-8') as f:
         price_catalogue = json.load(f)
 
@@ -28,7 +27,7 @@ def compute_sales(price_catalogue_file: str, sales_record_file: str) -> float:
 
 def main():
     """
-    Función principal que solicita archivos de entrada y muestra resultados.
+    Función principal que solicita archivos y muestra resultados.
     """
     start_time = time.time()
     price_catalogue_file = input("Enter the price catalogue file: ")
@@ -37,6 +36,11 @@ def main():
     try:
         result = compute_sales(price_catalogue_file, sales_record_file)
         print(f"Total Cost: ${result:.2f}")
+
+        # Escritura de resultados en el archivo SalesResults.txt
+        with open('SalesResults.txt', 'w', encoding='utf-8') as result_file:
+            result_file.write(f"Total Cost: ${result:.2f}")
+
     except FileNotFoundError as e:
         print(f"File not found error: {e}")
     except json.JSONDecodeError as e:
